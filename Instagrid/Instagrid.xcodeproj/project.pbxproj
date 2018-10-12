@@ -14,6 +14,7 @@
 		EC33E344215E257900294867 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC33E343215E257900294867 /* Assets.xcassets */; };
 		EC33E347215E257900294867 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC33E345215E257900294867 /* LaunchScreen.storyboard */; };
 		EC33E353215E3F1100294867 /* Delm-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = EC33E351215E3F1100294867 /* Delm-Medium.otf */; };
+		ECFD25E0216E402900B9E1EE /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFD25DF216E402900B9E1EE /* PhotoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		EC33E346215E257900294867 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC33E348215E257900294867 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC33E351215E3F1100294867 /* Delm-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Delm-Medium.otf"; path = "../../01. Design/Delm-Medium.otf"; sourceTree = "<group>"; };
+		ECFD25DF216E402900B9E1EE /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,8 +64,6 @@
 				EC33E34F215E25B800294867 /* View */,
 				EC33E350215E25C500294867 /* Controller */,
 				EC33E33C215E257900294867 /* AppDelegate.swift */,
-				EC33E33E215E257900294867 /* ViewController.swift */,
-				EC33E340215E257900294867 /* Main.storyboard */,
 				EC33E343215E257900294867 /* Assets.xcassets */,
 				EC33E345215E257900294867 /* LaunchScreen.storyboard */,
 				EC33E351215E3F1100294867 /* Delm-Medium.otf */,
@@ -83,6 +83,8 @@
 		EC33E34F215E25B800294867 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EC33E340215E257900294867 /* Main.storyboard */,
+				ECFD25DF216E402900B9E1EE /* PhotoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -90,6 +92,7 @@
 		EC33E350215E25C500294867 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				EC33E33E215E257900294867 /* ViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECFD25E0216E402900B9E1EE /* PhotoView.swift in Sources */,
 				EC33E33F215E257900294867 /* ViewController.swift in Sources */,
 				EC33E33D215E257900294867 /* AppDelegate.swift in Sources */,
 			);

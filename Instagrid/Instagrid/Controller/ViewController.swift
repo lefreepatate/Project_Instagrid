@@ -14,12 +14,22 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-    override func didReceiveMemoryWarning() {
+    @IBOutlet weak var gridArea: UIView!
+    @IBOutlet weak var grid1: UIStackView!
+    @IBOutlet weak var grid3: UIStackView!
+    @IBOutlet weak var grid2: UIStackView!
+    @IBOutlet var gridButtons: [UIStackView]!
+    
+    /*override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }*/
+
+    @IBAction func didTapGrid1() {
+        getNewGrid()
     }
-
-
+    private func getNewGrid(){
+        
+    }
 }
 

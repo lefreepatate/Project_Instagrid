@@ -416,6 +416,7 @@
                                 </variation>
                                 <connections>
                                     <outlet property="backgroundGrid" destination="vR4-Gb-Tri" id="qTy-Nt-ud1"/>
+                                    <outlet property="check" destination="1xR-a0-1IA" id="MuT-Wn-5fL"/>
                                     <outlet property="grid" destination="vR4-Gb-Tri" id="Rqy-bF-q3U"/>
                                     <outlet property="grid1" destination="vR4-Gb-Tri" id="JP7-Fl-MtR"/>
                                     <outlet property="grid2" destination="nFe-vX-mv6" id="GxX-QN-pGU"/>
@@ -807,6 +808,7 @@
                         <outlet property="grid1" destination="vR4-Gb-Tri" id="4kf-rb-WSx"/>
                         <outlet property="grid2" destination="nFe-vX-mv6" id="fu6-fj-b0l"/>
                         <outlet property="grid3" destination="KCh-dZ-Chg" id="q1N-D3-dIq"/>
+                        <outlet property="gridArea" destination="v67-G5-9gH" id="VNq-Nz-C3M"/>
                         <outlet property="menu" destination="Q3d-lL-EC4" id="9Hi-Ja-fHe"/>
                         <outletCollection property="GridButtons" destination="Q3d-lL-EC4" collectionClass="NSMutableArray" id="ymL-rm-kvd"/>
                         <outletCollection property="gridButtons" destination="Q3d-lL-EC4" collectionClass="NSMutableArray" id="6Ej-6a-np1"/>

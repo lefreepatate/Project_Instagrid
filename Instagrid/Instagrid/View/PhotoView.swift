@@ -7,34 +7,15 @@
 //
 
 import UIKit
-
+import Foundation
 class PhotoView: UIView {
 
     @IBOutlet private var check:UIImageView!
-    enum gridStyle {
-        case grid1, grid2, grid3
-    }
+
     enum menuChoice{
         case standard, selected
     }
-    var style:gridStyle = .grid1 {
-        didSet {
-            setView(style)
-        }
-    }
-    private func setView(_ style: gridStyle){
-        switch style {
-        case .grid1:
-            grid2 = []
-            grid3 = []
-        case .grid2:
-            grid1 = []
-            grid3 = []
-        case .grid3:
-            grid1 = []
-            grid2 = []
-        }
-    }
+
     var menuStyle:menuChoice = .standard {
         didSet {
             menuView(menuStyle)

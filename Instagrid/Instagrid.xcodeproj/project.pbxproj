@@ -14,6 +14,7 @@
 		EC33E344215E257900294867 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC33E343215E257900294867 /* Assets.xcassets */; };
 		EC33E347215E257900294867 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC33E345215E257900294867 /* LaunchScreen.storyboard */; };
 		EC33E353215E3F1100294867 /* Delm-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = EC33E351215E3F1100294867 /* Delm-Medium.otf */; };
+		EC7BF2CB2179E62400321311 /* PhotosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7BF2CA2179E62400321311 /* PhotosManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		EC33E346215E257900294867 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC33E348215E257900294867 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC33E351215E3F1100294867 /* Delm-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Delm-Medium.otf"; path = "../../01. Design/Delm-Medium.otf"; sourceTree = "<group>"; };
+		EC7BF2CA2179E62400321311 /* PhotosManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhotosManager.swift; path = Instagrid/Model/PhotosManager.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,9 +65,9 @@
 				EC33E350215E25C500294867 /* Controller */,
 				EC33E33C215E257900294867 /* AppDelegate.swift */,
 				EC33E343215E257900294867 /* Assets.xcassets */,
-				EC33E345215E257900294867 /* LaunchScreen.storyboard */,
 				EC33E351215E3F1100294867 /* Delm-Medium.otf */,
 				EC06FC3E216B4814004FF572 /* ThirstySoftRegular.otf */,
+				EC33E345215E257900294867 /* LaunchScreen.storyboard */,
 				EC33E348215E257900294867 /* Info.plist */,
 			);
 			path = Instagrid;
@@ -74,6 +76,7 @@
 		EC33E34E215E25AB00294867 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EC7BF2CA2179E62400321311 /* PhotosManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC7BF2CB2179E62400321311 /* PhotosManager.swift in Sources */,
 				EC33E33F215E257900294867 /* ViewController.swift in Sources */,
 				EC33E33D215E257900294867 /* AppDelegate.swift in Sources */,
 			);
@@ -191,7 +195,9 @@
 				EC33E346215E257900294867 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
+			path = "/Users/k-rlos/Documents/OCR/Parcours/Project_Instagrid/Instagrid/Instagrid";
+			sourceTree = "<absolute>";
+			usesTabs = 0;
 		};
 /* End PBXVariantGroup section */
 
@@ -310,7 +316,6 @@
 		EC33E34C215E257900294867 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
@@ -329,7 +334,6 @@
 		EC33E34D215E257900294867 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";

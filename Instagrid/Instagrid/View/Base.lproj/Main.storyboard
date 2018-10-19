@@ -120,21 +120,21 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="v67-G5-9gH" userLabel="Background grid" customClass="PhotoView" customModule="Instagrid" customModuleProvider="target">
+                            <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="v67-G5-9gH" userLabel="Background grid">
                                 <rect key="frame" x="72.333333333333343" y="170" width="269.33333333333326" height="269"/>
                                 <subviews>
-                                    <stackView tag="1000" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="vR4-Gb-Tri">
+                                    <stackView tag="1000" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="vR4-Gb-Tri" userLabel="photoGrid">
                                         <rect key="frame" x="15.000000000000014" y="15" width="239.33333333333337" height="239"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vgV-Bx-v2j">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="vgV-Bx-v2j">
                                                 <rect key="frame" x="0.0" y="0.0" width="239.33333333333334" height="112"/>
                                                 <subviews>
-                                                    <button contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pe-VB-g1b">
+                                                    <button contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pe-VB-g1b">
                                                         <rect key="frame" x="0.0" y="0.0" width="239.33333333333334" height="112"/>
                                                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <state key="normal" image="plus_icon"/>
                                                         <connections>
-                                                            <action selector="addButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LFr-D8-xhF"/>
+                                                            <action selector="photoButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YfF-ZQ-SPv"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -147,15 +147,21 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Kkp-he-cUd">
                                                 <rect key="frame" x="0.0" y="127" width="239.33333333333334" height="112"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXR-OA-tvj">
+                                                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXR-OA-tvj">
                                                         <rect key="frame" x="0.0" y="0.0" width="112.33333333333333" height="112"/>
                                                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <state key="normal" image="plus_icon"/>
+                                                        <connections>
+                                                            <action selector="photoButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jCl-sz-7OW"/>
+                                                        </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fia-Pa-box">
+                                                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fia-Pa-box">
                                                         <rect key="frame" x="127.33333333333331" y="0.0" width="112" height="112"/>
                                                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <state key="normal" image="plus_icon"/>
+                                                        <connections>
+                                                            <action selector="photoButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o6Y-ri-97A"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -378,13 +384,6 @@
                                 <exclude reference="cfb-DV-8mq"/>
                                 <exclude reference="oQm-z8-Pn8"/>
                                 <exclude reference="rTR-zU-Qey"/>
-                                <exclude reference="te8-Ch-DMX"/>
-                                <exclude reference="8kQ-el-fXj"/>
-                                <exclude reference="Zys-rA-lVW"/>
-                                <exclude reference="b8S-zB-fqb"/>
-                                <exclude reference="n7q-PC-v35"/>
-                                <exclude reference="o5u-x5-fsp"/>
-                                <exclude reference="p71-sB-Cdb"/>
                                 <exclude reference="dde-1J-17g"/>
                                 <exclude reference="HQx-zI-6Wo"/>
                                 <exclude reference="KUy-h8-wO5"/>
@@ -422,6 +421,13 @@
                                 <exclude reference="chy-ce-GK8"/>
                                 <exclude reference="qBK-Ak-Gos"/>
                                 <exclude reference="qOm-Bg-2rk"/>
+                                <exclude reference="te8-Ch-DMX"/>
+                                <exclude reference="8kQ-el-fXj"/>
+                                <exclude reference="Zys-rA-lVW"/>
+                                <exclude reference="b8S-zB-fqb"/>
+                                <exclude reference="n7q-PC-v35"/>
+                                <exclude reference="o5u-x5-fsp"/>
+                                <exclude reference="p71-sB-Cdb"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -441,13 +447,6 @@
                                 <exclude reference="bVZ-7a-hs7"/>
                                 <exclude reference="oQm-z8-Pn8"/>
                                 <exclude reference="rTR-zU-Qey"/>
-                                <include reference="te8-Ch-DMX"/>
-                                <exclude reference="8kQ-el-fXj"/>
-                                <include reference="Zys-rA-lVW"/>
-                                <exclude reference="b8S-zB-fqb"/>
-                                <include reference="n7q-PC-v35"/>
-                                <exclude reference="o5u-x5-fsp"/>
-                                <include reference="p71-sB-Cdb"/>
                                 <exclude reference="T80-yS-qS4"/>
                                 <include reference="dde-1J-17g"/>
                                 <exclude reference="D0m-Ec-fX1"/>
@@ -492,6 +491,13 @@
                                 <include reference="chy-ce-GK8"/>
                                 <exclude reference="qBK-Ak-Gos"/>
                                 <exclude reference="qOm-Bg-2rk"/>
+                                <include reference="te8-Ch-DMX"/>
+                                <exclude reference="8kQ-el-fXj"/>
+                                <include reference="Zys-rA-lVW"/>
+                                <exclude reference="b8S-zB-fqb"/>
+                                <include reference="n7q-PC-v35"/>
+                                <exclude reference="o5u-x5-fsp"/>
+                                <include reference="p71-sB-Cdb"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
@@ -514,17 +520,16 @@
                             <mask key="constraints">
                                 <include reference="bVZ-7a-hs7"/>
                                 <include reference="cfb-DV-8mq"/>
+                                <include reference="LPX-Jw-KlD"/>
                                 <include reference="Zys-rA-lVW"/>
                                 <include reference="b8S-zB-fqb"/>
-                                <include reference="LPX-Jw-KlD"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="PhotoGrid" destination="vR4-Gb-Tri" id="atQ-kc-GIz"/>
                         <outlet property="bottomGrid" destination="Kkp-he-cUd" id="fEI-RF-trb"/>
                         <outlet property="topGrid" destination="vgV-Bx-v2j" id="hEX-b1-oHl"/>
-                        <outletCollection property="topGrid" destination="8pe-VB-g1b" collectionClass="NSMutableArray" id="QcA-Fk-4tR"/>
+                        <outletCollection property="photoGrid" destination="vR4-Gb-Tri" collectionClass="NSMutableArray" id="HrY-3o-VIA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -538,6 +543,6 @@
         <image name="Layout 2" width="80" height="80"/>
         <image name="Layout 3" width="80" height="80"/>
         <image name="arrayleft" width="10" height="15"/>
-        <image name="plus_icon" width="48" height="48"/>
+        <image name="plus_icon" width="48" height="49"/>
     </resources>
 </document>

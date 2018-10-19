@@ -15,58 +15,50 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-    var icon = UIImageView() {
-        didSet {
-            icon.image = #imageLiteral(resourceName: "plus_icon")
-        }
-    }
-    @IBOutlet weak var PhotoGrid: UIStackView!
+    
+    @IBOutlet var photoGrid: [UIStackView]!
     @IBOutlet weak var topGrid:UIStackView!
     @IBOutlet weak var bottomGrid: UIStackView!
-    var button:UIButton! {
-        didSet {
-            icon.image = #imageLiteral(resourceName: "plus_icon")
-            button.backgroundColor = #colorLiteral(red: 0.9410838485, green: 0.9412414432, blue: 0.9410631061, alpha: 1)
-            icon.isHidden = false
-            button.isHidden = false
-        }
+    @IBAction func photoButton(_ sender: UIButton) {
+        sender.backgroundColor = #colorLiteral(red: 0.9410838485, green: 0.9412414432, blue: 0.9410631061, alpha: 1)
+        sender.setImage(#imageLiteral(resourceName: "plus_icon"), for: UIControl.State.normal)
+        sender.setImage(#imageLiteral(resourceName: "plus_icon_over"), for: UIControl.State.highlighted)
     }
-    
     @IBAction func button1(_ sender: UIButton) {
-        getGrid1()
+        sender.setBackgroundImage(#imageLiteral(resourceName: "Layout 1"), for: UIControl.State.normal)
+        sender.setImage(#imageLiteral(resourceName: "Layout1_over"), for: UIControl.State.selected)
+        reset()
     }
     @IBAction func button2(_ sender: UIButton) {
-        getGrid2()
+        reset()
     }
     @IBAction func button3(_ sender: UIButton) {
-        getGrid3()
+        reset()
     }
+ 
+    
     @objc func reset(){
-        let grid = [UIStackView]()
-        for views in grid{
+        let subViews = topGrid.arrangedSubviews + bottomGrid.arrangedSubviews
+        for views in subViews {
             topGrid.removeArrangedSubview(views)
             bottomGrid.removeArrangedSubview(views)
+            views.removeFromSuperview()
         }
     }
-     @objc func getGrid1() {
+    @objc func getGrid1() {
+        let grid = PhotoManager()
         reset()
-        topGrid.addArrangedSubview(button)
-        bottomGrid.addArrangedSubview(button)
-        bottomGrid.addArrangedSubview(button)
+        grid.grid1per2()
     }
     @objc func getGrid2() {
+        let grid = PhotoManager()
         reset()
-        topGrid.addArrangedSubview(button)
-        topGrid.addArrangedSubview(button)
-        bottomGrid.addArrangedSubview(button)
+        grid.grid2per1()
     }
-    @objc func getGrid3() {
+    @objc func getGrid3()  {
+        let grid = PhotoManager()
         reset()
-        topGrid.addArrangedSubview(button)
-        topGrid.addArrangedSubview(button)
-        bottomGrid.addArrangedSubview(button)
-        bottomGrid.addArrangedSubview(button)
+        grid.grid2per2()
     }
-
 }
 

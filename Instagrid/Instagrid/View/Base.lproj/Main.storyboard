@@ -126,10 +126,10 @@
                                     <stackView tag="1000" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="vR4-Gb-Tri" userLabel="photoGrid">
                                         <rect key="frame" x="15.000000000000014" y="15" width="239.33333333333337" height="239"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="vgV-Bx-v2j">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="vgV-Bx-v2j">
                                                 <rect key="frame" x="0.0" y="0.0" width="239.33333333333334" height="112"/>
                                                 <subviews>
-                                                    <button contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pe-VB-g1b">
+                                                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pe-VB-g1b">
                                                         <rect key="frame" x="0.0" y="0.0" width="239.33333333333334" height="112"/>
                                                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <state key="normal" image="plus_icon"/>
@@ -279,6 +279,13 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="27" id="9cS-9g-c4a"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Delm-Medium" family="Delm" pointSize="26"/>
+                                <color key="textColor" red="0.99999988080000002" green="0.99998140339999997" blue="0.9999924898" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LAYOUT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Vu-Np-8Kh">
+                                <rect key="frame" x="77" y="471" width="260" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" red="0.99999988080000002" green="0.99998140339999997" blue="0.9999924898" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -528,13 +535,14 @@
                     </view>
                     <connections>
                         <outlet property="bottomGrid" destination="Kkp-he-cUd" id="fEI-RF-trb"/>
+                        <outlet property="layoutLabel" destination="4Vu-Np-8Kh" id="24z-R8-hCL"/>
                         <outlet property="topGrid" destination="vgV-Bx-v2j" id="hEX-b1-oHl"/>
-                        <outletCollection property="photoGrid" destination="vR4-Gb-Tri" collectionClass="NSMutableArray" id="HrY-3o-VIA"/>
+                        <outletCollection property="photoGrid" destination="vR4-Gb-Tri" collectionClass="NSMutableArray" id="Nqm-B7-jYE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="24.107142857142858" y="31.884057971014496"/>
+            <point key="canvasLocation" x="23.188405797101453" y="31.473214285714285"/>
         </scene>
     </scenes>
     <resources>

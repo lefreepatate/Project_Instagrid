@@ -12,7 +12,7 @@ class PhotosManager {
     enum Style {
         case layout1per2, layout2per1, layout2per2
     }
-    var button = ViewController().makeButton()
+    var button = ViewController().makeButton
     func layoutGrid(_ style: Style){
         switch style {
         case .layout1per2: return case1() //[[button:0],[button:1,button:2]]
@@ -27,24 +27,24 @@ class PhotosManager {
         NotificationCenter.default.post(notification)
     }
     func case1() {
-        var table = [[button]]
+        var table = [[button()]]
         for _ in table {
-            table.insert([button], at:0)
-            table.insert([button,button], at:1)
+            table.insert([button()], at:0)
+            table.insert([button(),button()], at:1)
         }
     }
     func case2() {
-        var table = [[button]]
+        var table = [[button()]]
         for _ in table {
-            table.insert([button,button], at:0)
-            table.insert([button], at:1)
+            table.insert([button(),button()], at:0)
+            table.insert([button()], at:1)
         }
     }
     func case3() {
-        var table = [[button]]
+        var table = [[button()]]
         for _ in table {
-            table.insert([button,button], at:0)
-            table.insert([button,button], at:1)
+            table.insert([button(),button()], at:0)
+            table.insert([button(),button()], at:1)
         }
     }
 

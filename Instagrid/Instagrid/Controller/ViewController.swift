@@ -19,14 +19,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet var photoGrid: [UIStackView]!
     @IBOutlet weak var topGrid:UIStackView!
     @IBOutlet weak var bottomGrid: UIStackView!
-    @IBOutlet weak var tapButton: UILabel!
     @IBAction func UpLoadButton(_ sender: UIButton) {
-        _ = makeButton()
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true, completion: nil)
     }
     
+    var photoManager = PhotosManager()
     let imagePicker = UIImagePickerController()
     
     @IBAction func button1(_ sender: UIButton) {
@@ -41,33 +40,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         getGrid3()
     }
     
-    var touchCount = 0
-    
-    lazy var button = makeButton()
-    
-    var identifyButton = 0
-    
-    func getUniqueButton(button:UIButton) -> Int {
-        identifyButton += 1
-        if button.state == .highlighted {
-            touchCount += 1
-        }
-        tapButton.text = "Number of buttons: \(identifyButton)\nButton touched: \(touchCount)"
-        return identifyButton + touchCount
-    }
-    
-    func makeButton() -> UIButton {
-        let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.9410838485, green: 0.9412414432, blue: 0.9410631061, alpha: 1)
-        button.setImage(#imageLiteral(resourceName: "plus_icon"), for: UIControl.State.normal)
-        button.setImage(#imageLiteral(resourceName: "plus_icon_over"), for: UIControl.State.highlighted)
-        _ = getUniqueButton(button: button)
-        return button
-    }
-    
     @objc func reset(){
-        identifyButton = 0
-        touchCount = 0
         let subViews = topGrid.arrangedSubviews + bottomGrid.arrangedSubviews
         for view in subViews {
             view.removeFromSuperview()
@@ -75,28 +48,39 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func getGrid1(){
-        reset()
-        let view = makeButton
-        topGrid.addArrangedSubview(view())
-        bottomGrid.addArrangedSubview(view())
-        bottomGrid.addArrangedSubview(view())
+        populateLayout()
+        photoManager.getNewGrid(style:.case1)
     }
     
     @objc func getGrid2() {
-        reset()
-        let view = makeButton
-        topGrid.addArrangedSubview(view())
-        topGrid.addArrangedSubview(view())
-        bottomGrid.addArrangedSubview(view())
+        populateLayout()
+        photoManager.getNewGrid(style:.case2)
     }
     
     @objc func getGrid3()  {
+        populateLayout()
+        photoManager.getNewGrid(style:.case3)
+    }
+    
+    func getImage() -> UIButton{
+        let buttonView = photoManager.makeButton()
+        return buttonView
+    }
+    
+    func populateLayout() {
         reset()
-        let view = makeButton
-        topGrid.addArrangedSubview(view())
-        topGrid.addArrangedSubview(view())
-        bottomGrid.addArrangedSubview(view())
-        bottomGrid.addArrangedSubview(view())
+        
+        var grid = photoManager.imagesGrid
+        let top = grid[0]
+        let bottom = grid[1]
+        
+        for _ in top.enumerated() {
+            topGrid.addArrangedSubview(getImage())
+            
+        }
+        for _ in bottom.enumerated() {
+            bottomGrid.addArrangedSubview(getImage())
+        }
     }
 }
 

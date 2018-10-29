@@ -52,40 +52,40 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func getGrid1(){
-        photoManager.getNewGrid(style:.case1)
+        photoManager.style = .case1
         populateLayout()
     }
     
     @objc func getGrid2() {
-        photoManager.getNewGrid(style:.case2)
+        photoManager.style = .case2
         populateLayout()
     }
     
     @objc func getGrid3()  {
-        photoManager.getNewGrid(style:.case3)
+        photoManager.style = .case3
         populateLayout()
     }
     
-    @objc func makeButton() -> UIButton {
+    @objc func makeButton(image:UIImage) -> UIButton {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.9410838485, green: 0.9412414432, blue: 0.9410631061, alpha: 1)
-        button.setImage(#imageLiteral(resourceName: "plus_icon"), for: UIControl.State.normal)
+        button.setImage(image, for: UIControl.State.normal)
         button.setImage(#imageLiteral(resourceName: "plus_icon_over"), for: UIControl.State.highlighted)
         return button
     }
     
     func populateLayout() {
         reset()
-        var grid = photoManager.imagesGrid
+        var grid = photoManager.imageGrid
         let top = grid[0]
         let bottom = grid[1]
         
-        for _ in top.enumerated() {
-            topGrid.addArrangedSubview(makeButton())
+        for image in top.enumerated() {
+            topGrid.addArrangedSubview(makeButton(image: image.element))
         }
         
-        for _ in bottom.enumerated() {
-            bottomGrid.addArrangedSubview(makeButton())
+        for image in bottom.enumerated() {
+            bottomGrid.addArrangedSubview(makeButton(image: image.element))
         }
     }
 }

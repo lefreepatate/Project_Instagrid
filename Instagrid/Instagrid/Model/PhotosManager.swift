@@ -9,24 +9,39 @@ import UIKit
 import Foundation
 class PhotosManager {
     
-    enum layoutStyle {
+    enum LayoutStyle {
         case case1, case2, case3
     }
     
-    var button = UIButton()
-    var imagesGrid = [[UIButton]]()
-    var style:layoutStyle = .case1
+    var images:[UIImage]
+    var style:LayoutStyle = .case1
     
     init() {
-        imagesGrid = [[button],[button]]
+        images = [
+            UIImage(named:"plus_icon")!,
+            UIImage(named:"plus_icon")!,
+            UIImage(named:"plus_icon")!,
+            UIImage(named:"plus_icon")!
+        ]
     }
     
-    func getNewGrid(style:layoutStyle){
-        self.style = style
+    var imageGrid:[[UIImage]]{
         switch style {
-        case .case1: imagesGrid = [[button],[button,button]]
-        case .case2: imagesGrid = [[button,button],[button]]
-        case .case3: imagesGrid = [[button,button],[button,button]]
+        case .case1: return
+            [
+            [images[0]],
+            [images[1],images[2]]
+            ]
+        case .case2:  return
+            [
+            [images[0],images[1]],
+            [images[2]]
+            ]
+        case .case3:  return
+            [
+            [images[0],images[1]],
+            [images[2],images[3]]
+            ]
         }
     }
 }

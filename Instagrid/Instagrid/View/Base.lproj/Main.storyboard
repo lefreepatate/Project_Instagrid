@@ -222,11 +222,15 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FyV-7K-YOb">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" button="YES" selected="YES"/>
+                                        </accessibility>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="FyV-7K-YOb" secondAttribute="height" multiplier="1:1" id="laN-oc-NaN"/>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="80" id="u5J-rF-D9b"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="Layout 1"/>
+                                        <state key="highlighted" backgroundImage="Layout1_over"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="u5J-rF-D9b"/>
@@ -245,6 +249,7 @@
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pG8-x1-EIB">
                                         <rect key="frame" x="90" y="0.0" width="80" height="80"/>
                                         <state key="normal" backgroundImage="Layout 2"/>
+                                        <state key="highlighted" backgroundImage="Layout2_over"/>
                                         <connections>
                                             <action selector="button2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zhk-Ql-F6J"/>
                                         </connections>
@@ -257,6 +262,9 @@
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="80" id="dXh-zS-Jbk"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="Layout 3"/>
+                                        <state key="disabled" backgroundImage="Layout3_over"/>
+                                        <state key="selected" backgroundImage="Layout3_over"/>
+                                        <state key="highlighted" backgroundImage="Layout3_over"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="MHG-Jf-6DN"/>
@@ -611,6 +619,9 @@
         <image name="Layout 1" width="80" height="80"/>
         <image name="Layout 2" width="80" height="80"/>
         <image name="Layout 3" width="80" height="80"/>
+        <image name="Layout1_over" width="80" height="80"/>
+        <image name="Layout2_over" width="80" height="80"/>
+        <image name="Layout3_over" width="80" height="80"/>
         <image name="arrayleft" width="10" height="15"/>
         <image name="plus_icon" width="48" height="49"/>
         <image name="plus_icon_over" width="48" height="48"/>

@@ -9,26 +9,18 @@ import UIKit
 import Foundation
 class PhotosManager {
     
-    var button = UIButton()
-    var imagesGrid = [[UIButton]]()
-    init() {
-        imagesGrid = [[button,button],[button,button]]
-    }
-
-    var style:layoutStyle = .case1
     enum layoutStyle {
         case case1, case2, case3
     }
-
     
-    func makeButton() -> UIButton {
-        let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.9410838485, green: 0.9412414432, blue: 0.9410631061, alpha: 1)
-        button.setImage(#imageLiteral(resourceName: "plus_icon"), for: UIControl.State.normal)
-        button.setImage(#imageLiteral(resourceName: "plus_icon_over"), for: UIControl.State.highlighted)
-        return button
+    var button = UIButton()
+    var imagesGrid = [[UIButton]]()
+    var style:layoutStyle = .case1
+    
+    init() {
+        imagesGrid = [[button],[button]]
     }
-
+    
     func getNewGrid(style:layoutStyle){
         self.style = style
         switch style {

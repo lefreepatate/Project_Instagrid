@@ -9,24 +9,28 @@
 import UIKit
 import Foundation
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    @IBOutlet var photoGrid: [UIStackView]!
+    @IBOutlet weak var topGrid:UIStackView!
+    @IBOutlet weak var bottomGrid: UIStackView!
+    
+    var photoManager = PhotosManager()
+    let imagePicker = UIImagePickerController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        getGrid1()
         /*let name = Notification.Name(rawValue: "Grid")
          NotificationCenter.default.addObserver(self, selector: #selector(getGrid1), name: name, object: nil)*/
         // Do any additional setup after loading the view, typically from a nib.
     }
-    @IBOutlet var photoGrid: [UIStackView]!
-    @IBOutlet weak var topGrid:UIStackView!
-    @IBOutlet weak var bottomGrid: UIStackView!
+    
     @IBAction func UpLoadButton(_ sender: UIButton) {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true, completion: nil)
     }
-    
-    var photoManager = PhotosManager()
-    let imagePicker = UIImagePickerController()
     
     @IBAction func button1(_ sender: UIButton) {
         getGrid1()
@@ -48,38 +52,40 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func getGrid1(){
-        populateLayout()
         photoManager.getNewGrid(style:.case1)
+        populateLayout()
     }
     
     @objc func getGrid2() {
-        populateLayout()
         photoManager.getNewGrid(style:.case2)
+        populateLayout()
     }
     
     @objc func getGrid3()  {
-        populateLayout()
         photoManager.getNewGrid(style:.case3)
+        populateLayout()
     }
     
-    func getImage() -> UIButton{
-        let buttonView = photoManager.makeButton()
-        return buttonView
+    @objc func makeButton() -> UIButton {
+        let button = UIButton()
+        button.backgroundColor = #colorLiteral(red: 0.9410838485, green: 0.9412414432, blue: 0.9410631061, alpha: 1)
+        button.setImage(#imageLiteral(resourceName: "plus_icon"), for: UIControl.State.normal)
+        button.setImage(#imageLiteral(resourceName: "plus_icon_over"), for: UIControl.State.highlighted)
+        return button
     }
     
     func populateLayout() {
         reset()
-        
         var grid = photoManager.imagesGrid
         let top = grid[0]
         let bottom = grid[1]
         
         for _ in top.enumerated() {
-            topGrid.addArrangedSubview(getImage())
-            
+            topGrid.addArrangedSubview(makeButton())
         }
+        
         for _ in bottom.enumerated() {
-            bottomGrid.addArrangedSubview(getImage())
+            bottomGrid.addArrangedSubview(makeButton())
         }
     }
 }

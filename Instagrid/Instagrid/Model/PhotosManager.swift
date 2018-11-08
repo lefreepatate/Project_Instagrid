@@ -14,7 +14,7 @@ class PhotosManager {
     }
     
     var images:[UIImage]
-    var style:LayoutStyle = .case1
+    var style = LayoutStyle.case1
     
     init() {
         images = [
@@ -24,23 +24,23 @@ class PhotosManager {
             UIImage(named:"plus_icon")!
         ]
     }
-    
+
     var imageGrid:[[UIImage]]{
         switch style {
         case .case1: return
             [
-            [images[0]],
-            [images[1],images[2]]
+                [images[0]],
+                [images[1],images[2]]
             ]
         case .case2:  return
             [
-            [images[0],images[1]],
-            [images[2]]
+                [images[0],images[1]],
+                [images[2]]
             ]
         case .case3:  return
             [
-            [images[0],images[1]],
-            [images[2],images[3]]
+                [images[0],images[1]],
+                [images[2],images[3]]
             ]
         }
     }

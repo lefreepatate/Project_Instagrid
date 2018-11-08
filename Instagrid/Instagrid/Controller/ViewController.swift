@@ -9,39 +9,66 @@
 import UIKit
 import Foundation
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     @IBOutlet var photoGrid: [UIStackView]!
     @IBOutlet weak var topGrid:UIStackView!
     @IBOutlet weak var bottomGrid: UIStackView!
+    @IBOutlet var menuButtons: [UIStackView]!
     
     var photoManager = PhotosManager()
     let imagePicker = UIImagePickerController()
+    private var imageTag:Int?
+    let button = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imagePicker.delegate = self
         getGrid1()
-        /*let name = Notification.Name(rawValue: "Grid")
-         NotificationCenter.default.addObserver(self, selector: #selector(getGrid1), name: name, object: nil)*/
-        // Do any additional setup after loading the view, typically from a nib.
     }
-    
-    @IBAction func UpLoadButton(_ sender: UIButton) {
+    @objc func photofromLibrary( _ sender: UIButton) {
+        imagePicker.delegate = self
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
+        
         present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        guard let newImage = info[.originalImage] as? UIImage else {return}
+        
+        imageTag = button.tag
+        photoManager.images.insert(newImage, at: imageTag!)
+        button.tag += 1
+        if button.tag > 3 {button.tag = 0}
+        
+        populateLayout()
+        
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func button1(_ sender: UIButton) {
         getGrid1()
+        sender.setBackgroundImage(UIImage(named:"Layout1")!, for: .normal)
+        sender.setBackgroundImage(UIImage(named:"Layout1_over")!, for:.selected)
+        sender.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
     
     @IBAction func button2(_ sender: UIButton) {
         getGrid2()
+        sender.setBackgroundImage(UIImage(named:"Layout2")!, for: .normal)
+        sender.setBackgroundImage(UIImage(named:"Layout2_over")!, for: .selected)
+        sender.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
     
     @IBAction func button3(_ sender: UIButton) {
         getGrid3()
+        sender.setBackgroundImage(UIImage(named:"Layout3")!, for: .normal)
+        sender.setBackgroundImage(UIImage(named:"Layout3_over")!, for: .selected)
+        sender.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+    }
+    
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        sender.isHighlighted = !sender.isHighlighted
     }
     
     @objc func reset(){
@@ -66,16 +93,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         populateLayout()
     }
     
-    @objc func makeButton(image:UIImage) -> UIButton {
+    func makeButton(image:UIImage) -> UIButton {
+        
         let button = UIButton()
+        
         button.backgroundColor = #colorLiteral(red: 0.9410838485, green: 0.9412414432, blue: 0.9410631061, alpha: 1)
-        button.setImage(image, for: UIControl.State.normal)
-        button.setImage(#imageLiteral(resourceName: "plus_icon_over"), for: UIControl.State.highlighted)
+        button.setImage(image, for: .normal)
+        button.setImage(#imageLiteral(resourceName: "plus_icon_over"), for: .highlighted)
+        button.contentMode = .scaleAspectFit
+        button.tag = 0
+        button.addTarget(self, action: #selector(photofromLibrary(_:)), for: .touchUpInside)
+        
         return button
     }
     
     func populateLayout() {
         reset()
+        
         var grid = photoManager.imageGrid
         let top = grid[0]
         let bottom = grid[1]
@@ -83,7 +117,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         for image in top.enumerated() {
             topGrid.addArrangedSubview(makeButton(image: image.element))
         }
-        
         for image in bottom.enumerated() {
             bottomGrid.addArrangedSubview(makeButton(image: image.element))
         }

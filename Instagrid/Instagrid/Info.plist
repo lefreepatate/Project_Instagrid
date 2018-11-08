@@ -46,5 +46,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
+	<key>CFBundleDisplayName</key>
+	<string></string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>We need to import photos of people</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>We need to import photos of people</string>
 </dict>
 </plist>

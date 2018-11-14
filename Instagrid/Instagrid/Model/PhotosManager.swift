@@ -9,22 +9,22 @@ import UIKit
 import Foundation
 class PhotosManager {
     
+    // Getting enum Style for below grids
     enum LayoutStyle {
         case case1, case2, case3
     }
+    // New array with 4 images used below, and for getting the buttons
+    var images = [
+        UIImage(named:"plus_icon")!,
+        UIImage(named:"plus_icon")!,
+        UIImage(named:"plus_icon")!,
+        UIImage(named:"plus_icon")!
+    ]
     
-    var images:[UIImage]
+    // Getting "case1" as default parameter
     var style = LayoutStyle.case1
     
-    init() {
-        images = [
-            UIImage(named:"plus_icon")!,
-            UIImage(named:"plus_icon")!,
-            UIImage(named:"plus_icon")!,
-            UIImage(named:"plus_icon")!
-        ]
-    }
-
+    // Using a 2 model array which will call the viewController to change the view "grid"
     var imageGrid:[[UIImage]]{
         switch style {
         case .case1: return

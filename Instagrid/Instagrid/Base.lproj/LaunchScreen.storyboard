@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina5_5" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_5" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,11 +14,11 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="Instagrid" translatesAutoresizingMaskIntoConstraints="NO" id="aFx-Ys-t6A">
-                                <rect key="frame" x="109.66666666666669" y="340" width="195" height="56"/>
+                                <rect key="frame" x="350.66666666666669" y="168.66666666666666" width="195.00000000000006" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="aFx-Ys-t6A" secondAttribute="height" multiplier="195:56" id="FQp-U7-5ax"/>
                                     <constraint firstAttribute="width" constant="195" id="Fix-2d-OTH"/>
@@ -27,8 +27,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.71764705880000002" green="0.84313725490000002" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="aFx-Ys-t6A" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="7aM-ZD-Bd8"/>
-                            <constraint firstItem="aFx-Ys-t6A" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="xJc-Dv-Alm"/>
+                            <constraint firstItem="aFx-Ys-t6A" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="YgK-VA-cPt"/>
+                            <constraint firstItem="aFx-Ys-t6A" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ivz-BD-lsR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

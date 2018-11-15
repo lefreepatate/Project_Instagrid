@@ -23,7 +23,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var swipeUpLabel: UILabel!
     @IBOutlet weak var swipeLeftLabel: UILabel!
     
-    
     // MARK: ---------- VARIABLES
     
     var photoManager = PhotosManager()
@@ -34,20 +33,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // MARK: ---------- IBACTIONS
     
     @IBAction func button1(_ sender: UIButton) {
-        getGrid1()
-        checkSelected()
+        setGrid1()
+        resetSelectedButtons()
         sender.isSelected = true
     }
+    
     @IBAction func button2(_ sender: UIButton) {
-        getGrid2()
-        checkSelected()
+        setGrid2()
+        resetSelectedButtons()
         sender.isSelected = true
     }
+    
     @IBAction func button3(_ sender: UIButton) {
-        getGrid3()
-        checkSelected()
+        setGrid3()
+        resetSelectedButtons()
         sender.isSelected = true
     }
+    
     @IBAction func buttonPressed(_ sender: UIButton) {
         sender.isHighlighted = !sender.isHighlighted
     }
@@ -56,18 +58,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // Getting grid case 1 from model by default
     override func viewDidLoad() {
-        super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(addSwipeGesture), name: UIDevice.orientationDidChangeNotification, object: nil)
-        imagePicker.delegate = self
-        applyGridDesign(grid: backgroundView)
-        getGrid1()
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_ :)))
-        backgroundView.addGestureRecognizer(swipe)
         
+        super.viewDidLoad()
+        imagePicker.delegate = self
+        applyGridDesign(grid: view)
+        setGrid1()
+        
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        addSwipeGesture()
     }
     
     // Functions calling the pickerDelegate getting new images
     @objc func photofromLibrary( _ sender: UIButton) {
+        
         imageTag = sender.tag
         imagePicker.delegate = self
         imagePicker.allowsEditing = false
@@ -78,8 +84,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // Reset function removing the actual views in the grid
     @objc func reset(){
+        
         let subViews = topGrid.arrangedSubviews + bottomGrid.arrangedSubviews
-        for view in subViews { view.removeFromSuperview() }
+        for view in subViews {
+            view.removeFromSuperview()
+        }
+        
     }
     
     // Function making new buttons to being calling after for the grids
@@ -99,10 +109,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // Getting designs style for the Grid
     func applyGridDesign(grid:UIView) {
+        
         grid.layer.shadowColor = UIColor.black.cgColor
         grid.layer.shadowRadius = 4
         grid.layer.shadowOpacity = 0.5
         grid.layer.shadowOffset = CGSize(width: 0, height: 4)
+        
     }
     
     // Function replacing the current views by model views containing an image "+"
@@ -114,41 +126,44 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let bottom = grid[1]
         var count = 0
         
-        for image in top.enumerated() {
-            topGrid.addArrangedSubview(makeButton(image: image.element,tag:count))
+        for image in top {
+            topGrid.addArrangedSubview(makeButton(image: image,tag:count))
             count += 1
         }
-        for image in bottom.enumerated() {
-            bottomGrid.addArrangedSubview(makeButton(image: image.element,tag:count))
+        for image in bottom {
+            bottomGrid.addArrangedSubview(makeButton(image: image,tag:count))
             count += 1
         }
     }
     
-    //Function checking which button is selected on the menu bar
-    func checkSelected(){
-        for button in menuButtons{ (button as UIButton).isSelected = false }
+    //Function checking and reset selected buttons while one new is selected
+    func resetSelectedButtons(){
+        for button in menuButtons{
+            (button as UIButton).isSelected = false
+        }
     }
     
-    // Function getting the grid case 1 from the model
-    @objc func getGrid1(){
+    // Function setting the grid case 1 from the model
+    @objc func setGrid1(){
         photoManager.style = .case1
         populateLayout()
     }
     
-    // Function getting the grid case 2 from the model
-    @objc func getGrid2() {
+    // Function setting the grid case 2 from the model
+    @objc func setGrid2() {
         photoManager.style = .case2
         populateLayout()
     }
     
-    // Function getting the grid case 3 from the model
-    @objc func getGrid3()  {
+    // Function setting the grid case 3 from the model
+    @objc func setGrid3()  {
         photoManager.style = .case3
         populateLayout()
     }
     
     //Function getting the new image and replacing by the default one
-    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo
+        info: [UIImagePickerController.InfoKey : Any]) {
         
         guard let newImage = info[.originalImage] as? UIImage else {return}
         
@@ -158,66 +173,73 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismiss(animated: true, completion: nil)
     }
     
-    // Function calling gesture reconizer
+    // Function checking the device orientation and giving a swipe according to
     @objc func addSwipeGesture(){
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_ :)))
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_ :)))
+        let sender = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
         
         if UIDevice.current.orientation.isPortrait {
-            swipeUp.direction = .up
-            print("portrait\n")
-        } else {
-            swipeLeft.direction = .left
-            print("paysage\n")
+            sender.direction = .up
+            print("addswipe up")
+        } else if UIDevice.current.orientation.isLandscape{
+            sender.direction = .left
+            print("addswipe left")
         }
-        view.addGestureRecognizer(swipeUp)
-        view.addGestureRecognizer(swipeLeft)
+        view.addGestureRecognizer(sender)
     }
     
+    // Function kepping avaible the swipe gesture
     @objc func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
+        
         if gesture.state == .ended {
             switch gesture.direction {
             case .up:
+                print("swipe up")
                 upAnimation()
             case .left:
+                print("swipe left")
                 leftAnimation()
             default:
                 break
             }
         }
+        
     }
     
     // Animations for each swipe state
     private func upAnimation() {
         print("animating up")
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 5, options:.curveEaseInOut, animations: {
-            self.backgroundGrid.transform = CGAffineTransform(translationX:0 , y: 50)
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 5,
+                       options:.curveEaseInOut, animations: {
+                        self.backgroundGrid.transform = CGAffineTransform(translationX:0 , y: 50)
         }) { (_) in
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options:.curveEaseInOut, animations: {
-                self.backgroundGrid.transform = CGAffineTransform(translationX:0 , y: -self.view.frame.height)
-                self.titleLabel.transform = self.titleLabel.transform.translatedBy(x: 0, y: 150)
-                self.swipeUpLabel.transform = self.titleLabel.transform.translatedBy(x: 0, y: 10)
-                self.swipeUpLabel.text = "GREAT !"
-                self.swipeUpLabel.textColor = #colorLiteral(red: 0, green: 0.4076067805, blue: 0.6132292151, alpha: 1)
-                self.arrayView.alpha = 0
-                self.arrayView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0,
+                           options:.curveEaseInOut, animations: {
+                            self.backgroundGrid.transform = CGAffineTransform(translationX:0 , y: -self.view.frame.height)
+                            self.titleLabel.transform = self.titleLabel.transform.translatedBy(x: 0, y: 150)
+                            self.swipeUpLabel.transform = self.titleLabel.transform.translatedBy(x: 0, y: 10)
+                            self.swipeUpLabel.text = "GREAT !"
+                            self.swipeUpLabel.textColor = #colorLiteral(red: 0, green: 0.4076067805, blue: 0.6132292151, alpha: 1)
+                            self.arrayView.alpha = 0
+                            self.arrayView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
             })
         }
     }
     
     private func leftAnimation() {
         print("animating left")
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 5, options:.curveEaseInOut, animations: {
-            self.backgroundGrid.transform = CGAffineTransform(translationX: 50 , y: 0)
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 5,
+                       options:.curveEaseInOut, animations: {
+                        self.backgroundGrid.transform = CGAffineTransform(translationX: 50 , y: 0)
         }) { (_) in
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options:.curveEaseInOut, animations:  {
-                self.backgroundGrid.transform = CGAffineTransform(translationX:-self.view.frame.width , y: 0)
-                self.swipeLeftLabel.text = "GREAT !"
-                self.swipeLeftLabel.textColor = #colorLiteral(red: 0, green: 0.4076067805, blue: 0.6132292151, alpha: 1)
-                self.titleLabel.transform = self.titleLabel.transform.translatedBy(x: 0, y: 150)
-                self.swipeLeftLabel.transform = self.swipeLeftLabel.transform.translatedBy(x: 260, y: 0)
-                self.arrayView.alpha = 0
-                self.arrayView.transform = CGAffineTransform(translationX: -self.view.frame.width, y: 0)
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity:
+                0, options:.curveEaseInOut, animations:  {
+                    self.backgroundGrid.transform = CGAffineTransform(translationX:-self.view.frame.width , y: 0)
+                    self.swipeLeftLabel.text = "GREAT !"
+                    self.swipeLeftLabel.textColor = #colorLiteral(red: 0, green: 0.4076067805, blue: 0.6132292151, alpha: 1)
+                    self.titleLabel.transform = self.titleLabel.transform.translatedBy(x: 0, y: 150)
+                    self.swipeLeftLabel.transform = self.swipeLeftLabel.transform.translatedBy(x: 260, y: 0)
+                    self.arrayView.alpha = 0
+                    self.arrayView.transform = CGAffineTransform(translationX: -self.view.frame.width, y: 0)
             })
         }
     }

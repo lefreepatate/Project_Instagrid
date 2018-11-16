@@ -58,38 +58,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // Getting grid case 1 from model by default
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         imagePicker.delegate = self
         applyGridDesign(grid: view)
         setGrid1()
-        
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator:
+        UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         addSwipeGesture()
     }
     
-    // Functions calling the pickerDelegate getting new images
-    @objc func photofromLibrary( _ sender: UIButton) {
-        
-        imageTag = sender.tag
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-        
-        present(imagePicker, animated: true, completion: nil)
-    }
-    
     // Reset function removing the actual views in the grid
     @objc func reset(){
-        
         let subViews = topGrid.arrangedSubviews + bottomGrid.arrangedSubviews
         for view in subViews {
             view.removeFromSuperview()
         }
-        
     }
     
     // Function making new buttons to being calling after for the grids
@@ -161,6 +147,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         populateLayout()
     }
     
+    // Functions calling the pickerDelegate getting new images
+    @objc func photofromLibrary( _ sender: UIButton) {
+        
+        imageTag = sender.tag
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
     //Function getting the new image and replacing by the default one
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo
         info: [UIImagePickerController.InfoKey : Any]) {
@@ -190,19 +187,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // Function kepping avaible the swipe gesture
     @objc func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
         
-        if gesture.state == .ended {
+        if gesture.state == .ended /* && photoManager.images[imageTag!] != UIImage(named:"plus_icon")!*/ {
             switch gesture.direction {
             case .up:
-                print("swipe up")
-                upAnimation()
+                if UIDevice.current.orientation.isPortrait {
+                    print("swipe up")
+                    upAnimation()
+                }
             case .left:
-                print("swipe left")
-                leftAnimation()
+                if UIDevice.current.orientation.isLandscape {
+                    print("swipe left")
+                    leftAnimation()
+                }
             default:
                 break
             }
+        } else {
+            self.swipeUpLabel.text = "Upload Photos to share ! "
         }
-        
     }
     
     // Animations for each swipe state
@@ -223,9 +225,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             self.arrayView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
             })
         }
+        shareImage()
     }
     
     private func leftAnimation() {
+        
         print("animating left")
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 5,
                        options:.curveEaseInOut, animations: {
@@ -242,6 +246,33 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     self.arrayView.transform = CGAffineTransform(translationX: -self.view.frame.width, y: 0)
             })
         }
+        shareImage()
+    }
+    
+    // Function sharing image
+    func shareImage() {
+        let imageToShare = backgroundGrid.asImage()
+        let activityController = UIActivityViewController(activityItems: [imageToShare], applicationActivities: nil)
+        
+        activityController.completionWithItemsHandler = { (nil,completed, _, error)
+            in
+            if completed {
+                print("great")
+            } else {
+                print("oh shit!")
+            }
+        }
+        present(activityController, animated: true){
+            print("presented")
+        }
     }
 }
 
+extension UIView {
+    func asImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { rendererContext in
+            layer.render(in: rendererContext.cgContext)
+        }
+    }
+}

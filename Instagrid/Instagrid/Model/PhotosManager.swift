@@ -8,40 +8,60 @@
 import UIKit
 import Foundation
 class PhotosManager {
-    
-    // Getting enum Style for below grids
-    enum LayoutStyle {
-        case case1, case2, case3
-    }
-    // New array with 4 images used below, and for getting the buttons
-    var images = [
-        UIImage(named:"plus_icon")!,
-        UIImage(named:"plus_icon")!,
-        UIImage(named:"plus_icon")!,
-        UIImage(named:"plus_icon")!
-    ]
-    
-    // Getting "case1" as default parameter
-    var style = LayoutStyle.case1
-    
-    // Using a 2 model array which will call the viewController to change the view "grid"
-    var imageGrid:[[UIImage]]{
-        switch style {
-        case .case1: return
-            [
-                [images[0]],
-                [images[1],images[2]]
-            ]
-        case .case2:  return
-            [
-                [images[0],images[1]],
-                [images[2]]
-            ]
-        case .case3:  return
-            [
-                [images[0],images[1]],
-                [images[2],images[3]]
-            ]
-        }
-    }
+   
+   // Getting enum Style for below grids
+   enum LayoutStyle {
+      case case1, case2, case3
+   }
+   
+   // New array with 4 images used below, and for getting the buttons
+   var images = [
+      UIImage(named:"plus_icon")!,
+      UIImage(named:"plus_icon")!,
+      UIImage(named:"plus_icon")!,
+      UIImage(named:"plus_icon")!
+   ]
+   
+   // Using a 2 model array which will call the viewController to change the view "grid"
+   var imageGrid: [[UIImage]] {
+      switch style {
+      case .case1: return
+         [
+            [images[0]],
+            [images[1], images[2]]
+         ]
+      case .case2: return
+         [
+            [images[0], images[1]],
+            [images[2]]
+         ]
+      case .case3: return
+         [
+            [images[0], images[1]],
+            [images[2], images[3]]
+         ]
+      }
+   }
+   
+   // Images must be loaded before share
+   var ready: Bool {
+      switch style {
+      case .case1: return
+         images[0] != UIImage(named: "plus_icon")
+            && images[1] != UIImage(named: "plus_icon")
+            && images[2] != UIImage(named: "plus_icon")
+      case .case2: return
+         images[0] != UIImage(named: "plus_icon")
+            && images[1] != UIImage(named: "plus_icon")
+            && images[2] != UIImage(named: "plus_icon")
+      case .case3: return
+         images[0] != UIImage(named: "plus_icon")
+            && images[1] != UIImage(named: "plus_icon")
+            && images[2] != UIImage(named: "plus_icon")
+            && images[2] != UIImage(named: "plus_icon")
+      }
+   }
+   
+   // Getting "case1" as default parameter
+   var style = LayoutStyle.case1
 }

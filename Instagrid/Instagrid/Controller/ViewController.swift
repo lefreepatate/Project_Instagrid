@@ -92,6 +92,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
       button.backgroundColor = #colorLiteral(red: 0.9410838485, green: 0.9412414432, blue: 0.9410631061, alpha: 1)
       button.tag = tag
       button.addTarget(self, action: #selector(photofromLibrary(_:)), for: .touchUpInside)
+      button.imageView?.layer.cornerRadius = 2
       button.layer.cornerRadius = 2
       button.imageView?.contentMode = .scaleAspectFill
       button.setImage(image, for: .normal)
@@ -177,9 +178,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    
    // Function checking the device orientation and giving a swipe according to
    @objc func addSwipeGesture(){
-      arrayAnimation()
       let sender = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
       removeRecognizer()
+      arrayAnimation()
       if UIDevice.current.orientation.isPortrait {
          sender.direction = .up
       } else if UIDevice.current.orientation.isLandscape {
@@ -187,7 +188,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
       }
       view.addGestureRecognizer(sender)
    }
-
+   
    // Function removing gesturerecognizer
    func removeRecognizer(){
       if let reconizers =  view.gestureRecognizers {
@@ -199,7 +200,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    
    // Function kepping avaible the swipe gesture
    @objc func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
-
       if photoManager.ready == false  {
          self.swipeUpLabel.text = "Upload Photos to share ! "
          self.swipeLeftLabel.text = "Upload Photos to share ! "
@@ -207,10 +207,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
          switch gesture.direction {
          case .up:
             upAnimation()
-            shareImage()
          case .left:
             leftAnimation()
-            shareImage()
          default:
             break
          }
@@ -220,19 +218,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    // Array animation
    private func arrayAnimation(){
       if photoManager.ready == true {
-         if UIDevice.current.orientation.isLandscape {
-            UIView.animate(withDuration: 0.5, animations: {
-               self.arrayView.transform = CGAffineTransform(translationX: -10, y: 0)
-            }){ (_) in
-               UIView.animateKeyframes(withDuration: 1, delay: 0.25, options:[.autoreverse, .repeat], animations: {
-                  self.arrayView.transform = CGAffineTransform(translationX: 0, y: 0)
-               })
-            }
-         } else if UIDevice.current.orientation.isPortrait {
+         if UIDevice.current.orientation.isPortrait {
             UIView.animate(withDuration: 0.5, animations: {
                self.arrayView.transform = CGAffineTransform(translationX: 0, y: -10)
             }){ (_) in
-               UIView.animateKeyframes(withDuration: 1, delay: 0.25, options:[.autoreverse, .repeat], animations: {
+               UIView.animateKeyframes(withDuration: 0.5, delay: 0.0, options:[.autoreverse, .repeat],
+                                       animations: {
+                                          self.arrayView.transform = CGAffineTransform(translationX: 0, y: 0)
+               })
+            }
+         } else  if UIDevice.current.orientation.isLandscape {
+            UIView.animate(withDuration: 0.5, animations: {
+               self.arrayView.transform = CGAffineTransform(translationX: -10, y: 0)
+            }){ (_) in
+               UIView.animateKeyframes(withDuration: 0.5, delay: 0.0, options:[.autoreverse, .repeat], animations: {
                   self.arrayView.transform = CGAffineTransform(translationX: 0, y: 0)
                })
             }
@@ -241,44 +240,40 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    }
    // Animations for each orientation state
    private func upAnimation() {
-
-      UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 2,
+      UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0,
                      options:.curveEaseInOut, animations: {
                         self.backgroundGrid.transform = CGAffineTransform(translationX:0 , y: 50)
       }) { (_) in
-         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0,
-                        options:.curveEaseInOut, animations: {
-                           self.backgroundGrid.transform = CGAffineTransform(translationX:0 ,
-                                                                             y: -self.view.frame.height)
+         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0,
+                        options: .curveEaseInOut, animations: {
+                           self.backgroundGrid.transform = CGAffineTransform(translationX:0 , y: -self.view.frame.height)
                            self.swipeUpLabel.text = "GREAT !"
                            self.swipeUpLabel.textColor = #colorLiteral(red: 0, green: 0.4076067805, blue: 0.6132292151, alpha: 1)
-                           self.arrayView.transform = CGAffineTransform(translationX:0 ,
-                                                                        y: -self.view.frame.height)
-                           self.arrayView.alpha = 0
+                           self.arrayView.transform = CGAffineTransform(translationX:0 , y: -self.view.frame.height)
+                           self.shareImage()
          })
       }
    }
-
+   
    private func leftAnimation() {
-
-      UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 2,
-                     options: .curveEaseInOut, animations: {
+      UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0,
+                     options:.curveEaseInOut, animations: {
                         self.backgroundGrid.transform = CGAffineTransform(translationX: 50 , y: 0)
       }) { (_) in
-         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5,
-                        initialSpringVelocity: 0, options: .curveEaseInOut, animations:  {
-                           self.backgroundGrid.transform = CGAffineTransform(translationX: -self.view.frame.width , y: 0)
+         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1,
+                        initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                           self.backgroundGrid.transform = CGAffineTransform(translationX: -self.backgroundView.frame.width , y: 0)
                            self.swipeLeftLabel.text = "GREAT !"
                            self.swipeLeftLabel.textColor = #colorLiteral(red: 0, green: 0.4076067805, blue: 0.6132292151, alpha: 1)
-                           self.arrayView.alpha = 0
-                           self.arrayView.transform = CGAffineTransform(translationX: self.view.frame.width, y: 0)
+                           self.arrayView.transform = CGAffineTransform(translationX: -self.view.frame.width/2, y: 0)
+                           self.shareImage()
          })
       }
    }
-
+   
    // Animation keeping default parameters after sending/cencelled sharing
    private func animationReset() {
-
+      
       UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 5,
                      options:.curveEaseInOut, animations: {
                         if UIDevice.current.orientation.isPortrait {
@@ -291,7 +286,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
                            self.backgroundGrid.transform = CGAffineTransform(translationX: 0, y: 0)
                            self.arrayView.transform = CGAffineTransform(translationX: 0, y: 0)
-                           self.arrayView.alpha = 1
                            self.swipeUpLabel.textColor = #colorLiteral(red: 0.9999060035, green: 1, blue: 0.9998731017, alpha: 1)
                            self.swipeLeftLabel.textColor = #colorLiteral(red: 0.9999060035, green: 1, blue: 0.9998731017, alpha: 1)
                            self.swipeUpLabel.text = "Swipe up to share"
@@ -299,11 +293,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
          })
       }
    }
-
+   
    //   Function sharing image
    func shareImage() {
-      let imageToShare = backgroundGrid.asImage()
-      imageToShare.jpegData(compressionQuality: 80)
+      let imageToShare: UIImage = backgroundGrid.asImage()
       
       let activityController = UIActivityViewController(activityItems: [imageToShare],
                                                         applicationActivities: nil)

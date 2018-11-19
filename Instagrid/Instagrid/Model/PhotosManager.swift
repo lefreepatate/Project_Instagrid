@@ -61,7 +61,7 @@ class PhotosManager {
             && images[3] != UIImage(named: "plus_icon")
       }
    }
-   
+   var test = UIImage.init(contentsOfFile: "plus_icon")
    // Getting "case1" as default parameter
    var style = LayoutStyle.case1
 }

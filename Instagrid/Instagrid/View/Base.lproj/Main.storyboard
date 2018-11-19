@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="landscape">
+    <device id="retina3_5" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -22,11 +22,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Instagrid" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pwm-1f-9pB" userLabel="pix_Instagrid">
-                                <rect key="frame" x="318" y="0.0" width="1" height="103"/>
+                                <rect key="frame" x="115" y="0.0" width="1" height="50"/>
                                 <color key="backgroundColor" red="0.71764705880000002" green="0.84313725490000002" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" image="YES"/>
@@ -99,7 +99,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="Instagrid" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oES-F2-hop">
-                                <rect key="frame" x="337.5" y="25.5" width="221" height="52"/>
+                                <rect key="frame" x="155" y="5" width="170" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="170" id="9Zr-o3-WZ8"/>
                                     <constraint firstAttribute="width" secondItem="oES-F2-hop" secondAttribute="height" multiplier="17:4" id="ASM-ce-Nty"/>
@@ -118,7 +118,7 @@
                                 </variation>
                             </label>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="Array" translatesAutoresizingMaskIntoConstraints="NO" id="979-9i-Fkm">
-                                <rect key="frame" x="176" y="207.5" width="10" height="15"/>
+                                <rect key="frame" x="52.5" y="149.5" width="10" height="15"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="15" id="ARU-Ae-n4X">
@@ -142,7 +142,7 @@
                                 </variation>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe left to share" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VYP-fL-x3I" userLabel="Swipe left to share">
-                                <rect key="frame" x="82.5" y="243.5" width="197.5" height="70"/>
+                                <rect key="frame" x="10" y="185.5" width="95" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="eJr-rT-nWM"/>
                                 </constraints>
@@ -164,7 +164,7 @@
                                 </variation>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="arB-lz-tnN" userLabel="pix_menu">
-                                <rect key="frame" x="578" y="103" width="274" height="1"/>
+                                <rect key="frame" x="365" y="50" width="115" height="1"/>
                                 <color key="backgroundColor" red="0.71764705880000002" green="0.84313725490000002" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="95" id="Ke0-vD-zQX">
@@ -183,7 +183,7 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S3s-pj-owr" userLabel="pix_swipe">
-                                <rect key="frame" x="44" y="232.5" width="274" height="1"/>
+                                <rect key="frame" x="0.0" y="174.5" width="115" height="1"/>
                                 <color key="backgroundColor" red="0.71764705880000002" green="0.84313725490000002" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="Yrl-UI-MEP">
@@ -205,26 +205,26 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v67-G5-9gH" userLabel="Background grid">
-                                <rect key="frame" x="318" y="103" width="260" height="260"/>
+                                <rect key="frame" x="115" y="50" width="250" height="250"/>
                                 <subviews>
                                     <stackView tag="1000" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="vR4-Gb-Tri" userLabel="photoGrid">
-                                        <rect key="frame" x="13" y="13" width="234" height="234"/>
+                                        <rect key="frame" x="12.5" y="12.5" width="225" height="225"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="vgV-Bx-v2j">
-                                                <rect key="frame" x="0.0" y="0.0" width="234" height="109.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="225" height="105"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z4F-tg-4E2">
-                                                        <rect key="frame" x="0.0" y="0.0" width="234" height="109.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="225" height="105"/>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <state key="normal" title="Button"/>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Kkp-he-cUd">
-                                                <rect key="frame" x="0.0" y="124.5" width="234" height="109.5"/>
+                                                <rect key="frame" x="0.0" y="120" width="225" height="105"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hpk-HI-CE5">
-                                                        <rect key="frame" x="0.0" y="0.0" width="234" height="109.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="225" height="105"/>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <state key="normal" title="Button"/>
                                                     </button>
@@ -268,10 +268,10 @@
                                 </variation>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="playback" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Q3d-lL-EC4" userLabel="Menu">
-                                <rect key="frame" x="675" y="103" width="80" height="260"/>
+                                <rect key="frame" x="384" y="50" width="77" height="250"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="749" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FyV-7K-YOb" userLabel="Button_1">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="77" height="76.5"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" button="YES" selected="YES"/>
                                         </accessibility>
@@ -286,7 +286,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pG8-x1-EIB" userLabel="Button_2">
-                                        <rect key="frame" x="0.0" y="90" width="80" height="80"/>
+                                        <rect key="frame" x="0.0" y="86.5" width="77" height="77"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" button="YES" selected="YES"/>
                                         </accessibility>
@@ -302,7 +302,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lYs-4u-wzh" userLabel="Button_3">
-                                        <rect key="frame" x="0.0" y="180" width="80" height="80"/>
+                                        <rect key="frame" x="0.0" y="173.5" width="77" height="76.5"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" button="YES" selected="YES"/>
                                         </accessibility>

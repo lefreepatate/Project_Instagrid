@@ -58,7 +58,7 @@ class PhotosManager {
          images[0] != UIImage(named: "plus_icon")
             && images[1] != UIImage(named: "plus_icon")
             && images[2] != UIImage(named: "plus_icon")
-            && images[2] != UIImage(named: "plus_icon")
+            && images[3] != UIImage(named: "plus_icon")
       }
    }
    

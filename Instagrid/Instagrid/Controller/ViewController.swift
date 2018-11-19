@@ -35,23 +35,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    @IBAction func button1(_ sender: UIButton) {
       setGrid1()
       resetSelectedButtons()
-      sender.isSelected = true
+      sender.isSelected = false
    }
    
    @IBAction func button2(_ sender: UIButton) {
       setGrid2()
       resetSelectedButtons()
-      sender.isSelected = true
+      sender.isSelected = false
    }
    
    @IBAction func button3(_ sender: UIButton) {
       setGrid3()
       resetSelectedButtons()
-      sender.isSelected = true
+      sender.isSelected = false
    }
    
    @IBAction func buttonPressed(_ sender: UIButton) {
-      sender.isHighlighted = !sender.isHighlighted
+      sender.isSelected = !sender.isSelected
    }
    
    // MARK: ---------- FUNCTIONS
@@ -59,8 +59,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    // Getting grid case 1 from model by default
    override func viewDidLoad() {
       super.viewDidLoad()
-      imagePicker.delegate = self
-      applyGridDesign(grid: view)
+      applyGridDesign(grid: backgroundGrid)
       setGrid1()
    }
    
@@ -75,7 +74,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    override func viewDidAppear(_ animated: Bool) {
       super.viewDidAppear(animated)
       addSwipeGesture()
-      
    }
    
    // Reset function removing the actual views in the grid
@@ -161,7 +159,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
       imageTag = sender.tag
       imagePicker.allowsEditing = false
       imagePicker.sourceType = .photoLibrary
-      
+      imagePicker.delegate = self
       present(imagePicker, animated: true, completion: nil)
    }
    
@@ -179,32 +177,29 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    
    // Function checking the device orientation and giving a swipe according to
    @objc func addSwipeGesture(){
+      arrayAnimation()
       let sender = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
       removeRecognizer()
       if UIDevice.current.orientation.isPortrait {
          sender.direction = .up
-         print("recognizer UP")
       } else if UIDevice.current.orientation.isLandscape {
          sender.direction = .left
-         print("recognizer LEFT")
       }
       view.addGestureRecognizer(sender)
    }
-   
+
    // Function removing gesturerecognizer
    func removeRecognizer(){
       if let reconizers =  view.gestureRecognizers {
          for gesture in reconizers {
             view.removeGestureRecognizer(gesture)
-            print("gesture removed")
          }
       }
    }
    
-   
    // Function kepping avaible the swipe gesture
    @objc func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
-      
+
       if photoManager.ready == false  {
          self.swipeUpLabel.text = "Upload Photos to share ! "
          self.swipeLeftLabel.text = "Upload Photos to share ! "
@@ -222,9 +217,31 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
       }
    }
    
+   // Array animation
+   private func arrayAnimation(){
+      if photoManager.ready == true {
+         if UIDevice.current.orientation.isLandscape {
+            UIView.animate(withDuration: 0.5, animations: {
+               self.arrayView.transform = CGAffineTransform(translationX: -10, y: 0)
+            }){ (_) in
+               UIView.animateKeyframes(withDuration: 1, delay: 0.25, options:[.autoreverse, .repeat], animations: {
+                  self.arrayView.transform = CGAffineTransform(translationX: 0, y: 0)
+               })
+            }
+         } else if UIDevice.current.orientation.isPortrait {
+            UIView.animate(withDuration: 0.5, animations: {
+               self.arrayView.transform = CGAffineTransform(translationX: 0, y: -10)
+            }){ (_) in
+               UIView.animateKeyframes(withDuration: 1, delay: 0.25, options:[.autoreverse, .repeat], animations: {
+                  self.arrayView.transform = CGAffineTransform(translationX: 0, y: 0)
+               })
+            }
+         }
+      }
+   }
    // Animations for each orientation state
    private func upAnimation() {
-      
+
       UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 2,
                      options:.curveEaseInOut, animations: {
                         self.backgroundGrid.transform = CGAffineTransform(translationX:0 , y: 50)
@@ -241,9 +258,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
          })
       }
    }
-   
+
    private func leftAnimation() {
-      
+
       UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 2,
                      options: .curveEaseInOut, animations: {
                         self.backgroundGrid.transform = CGAffineTransform(translationX: 50 , y: 0)
@@ -258,10 +275,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
          })
       }
    }
-   
+
    // Animation keeping default parameters after sending/cencelled sharing
    private func animationReset() {
-      
+
       UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 5,
                      options:.curveEaseInOut, animations: {
                         if UIDevice.current.orientation.isPortrait {
@@ -282,14 +299,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
          })
       }
    }
-   
+
    //   Function sharing image
    func shareImage() {
       let imageToShare = backgroundGrid.asImage()
       imageToShare.jpegData(compressionQuality: 80)
+      
       let activityController = UIActivityViewController(activityItems: [imageToShare],
                                                         applicationActivities: nil)
-      
       activityController.completionWithItemsHandler = { (nil,completed, _, error)
          in
          if completed {

@@ -17,7 +17,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    @IBOutlet weak var bottomGrid: UIStackView!
    @IBOutlet var menuButtons: [UIButton]!
    @IBOutlet weak var backgroundGrid: UIView!
-   @IBOutlet weak var backgroundView: UIView!
    @IBOutlet weak var titleLabel: UILabel!
    @IBOutlet weak var arrayView: UIImageView!
    @IBOutlet weak var swipeUpLabel: UILabel!
@@ -32,6 +31,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    
    // MARK: ---------- IBACTIONS
    
+   // Menu buttons setting the grid views for upload
    @IBAction func button1(_ sender: UIButton) {
       setGrid1()
       resetSelectedButtons()
@@ -66,14 +66,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    // Function checking iPhone's orientation
    override func viewWillTransition(to size: CGSize, with coordinator:
       UIViewControllerTransitionCoordinator) {
-      super.viewWillTransition(to: size, with: coordinator)
       addSwipeGesture()
+      super.viewWillTransition(to: size, with: coordinator)
    }
    
    // Function allowing addSwipeGeture to the view
    override func viewDidAppear(_ animated: Bool) {
-      super.viewDidAppear(animated)
       addSwipeGesture()
+      super.viewDidAppear(animated)
    }
    
    // Reset function removing the actual views in the grid
@@ -161,6 +161,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
       imagePicker.allowsEditing = false
       imagePicker.sourceType = .photoLibrary
       imagePicker.delegate = self
+      imagePicker.modalPresentationStyle = .popover
       present(imagePicker, animated: true, completion: nil)
    }
    
@@ -169,7 +170,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
       info: [UIImagePickerController.InfoKey : Any]) {
       
       guard let newImage = info[.originalImage] as? UIImage else { return }
-      
+      imagePicker.modalPresentationStyle = .popover
       photoManager.images[imageTag!] = newImage
       populateLayout()
       
@@ -201,8 +202,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    // Function kepping avaible the swipe gesture
    @objc func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
       if photoManager.ready == false  {
-         self.swipeUpLabel.text = "Upload Photos to share ! "
-         self.swipeLeftLabel.text = "Upload Photos to share ! "
+         self.swipeUpLabel.text = "Upload Photos to share !"
+         self.swipeLeftLabel.text = "Upload Photos to share !"
       } else if  gesture.state == .ended  {
          switch gesture.direction {
          case .up:
@@ -218,6 +219,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    // Array animation
    private func arrayAnimation(){
       if photoManager.ready == true {
+         self.swipeUpLabel.text = "Swipe up to share"
+         self.swipeLeftLabel.text = "Swipe left to share"
          if UIDevice.current.orientation.isPortrait {
             UIView.animate(withDuration: 0.5, animations: {
                self.arrayView.transform = CGAffineTransform(translationX: 0, y: -10)
@@ -262,7 +265,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
       }) { (_) in
          UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1,
                         initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
-                           self.backgroundGrid.transform = CGAffineTransform(translationX: -self.backgroundView.frame.width , y: 0)
+                           self.backgroundGrid.transform = CGAffineTransform(translationX: -self.view.frame.width , y: 0)
                            self.swipeLeftLabel.text = "GREAT !"
                            self.swipeLeftLabel.textColor = #colorLiteral(red: 0, green: 0.4076067805, blue: 0.6132292151, alpha: 1)
                            self.arrayView.transform = CGAffineTransform(translationX: -self.view.frame.width/2, y: 0)
@@ -312,6 +315,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    }
 }
 
+// Disable landscape ImagePickerController bug
+extension UIImagePickerController {
+   override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+      return .all
+   }
+}
+
+// Transform an UIView into an UIImage for share
 extension UIView {
    func asImage() -> UIImage {
       let renderer = UIGraphicsImageRenderer(bounds: bounds)

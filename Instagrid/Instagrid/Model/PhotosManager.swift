@@ -22,7 +22,7 @@ class PhotosManager {
       UIImage(named:"plus_icon")!
    ]
    
-   // Using a 2 model array which will call the viewController to change the view "grid"
+   // Using a 2D array model which will be called by the viewController to change the view "grid"
    var imageGrid: [[UIImage]] {
       switch style {
       case .case1: return
@@ -42,8 +42,9 @@ class PhotosManager {
          ]
       }
    }
+   // MARK: \\\ BONUS
+   // Images must be loaded before sharing
    
-   // Images must be loaded before share
    var ready: Bool {
       switch style {
       case .case1: return
@@ -61,7 +62,7 @@ class PhotosManager {
             && images[3] != UIImage(named: "plus_icon")
       }
    }
-   var test = UIImage.init(contentsOfFile: "plus_icon")
+   
    // Getting "case1" as default parameter
    var style = LayoutStyle.case1
 }

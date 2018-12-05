@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
    
-   // MARK: ---------- IBOUTLET
+   // MARK: \\\ IBOUTLET
    
    @IBOutlet var photoGrid: [UIStackView]!
    @IBOutlet weak var topGrid: UIStackView!
@@ -22,14 +22,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    @IBOutlet weak var swipeUpLabel: UILabel!
    @IBOutlet weak var swipeLeftLabel: UILabel!
    
-   // MARK: ---------- VARIABLES
+   // MARK: \\\ VARIABLES
    
    var photoManager = PhotosManager()
    let imagePicker = UIImagePickerController()
    private var imageTag: Int?
-   let button = UIButton()
    
-   // MARK: ---------- IBACTIONS
+   // MARK: \\\ IBACTIONS
    
    // Menu buttons setting the grid views for upload
    @IBAction func button1(_ sender: UIButton) {
@@ -54,7 +53,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
       sender.isSelected = !sender.isSelected
    }
    
-   // MARK: ---------- FUNCTIONS
+   // MARK: \\\ FUNCTIONS
    
    // Getting grid case 1 from model by default
    override func viewDidLoad() {
@@ -74,6 +73,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    override func viewDidAppear(_ animated: Bool) {
       addSwipeGesture()
       super.viewDidAppear(animated)
+   }
+   
+   //Function checking and reset selected buttons while one new is selected
+   func resetSelectedButtons() {
+      for button in menuButtons {
+         (button as UIButton).isSelected = false
+      }
    }
    
    // Reset function removing the actual views in the grid
@@ -101,7 +107,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
       return button
    }
    
-   // Getting designs style for the Grid
+   // Getting designs style for the backgroundGrid
    func applyGridDesign(grid: UIView) {
       
       grid.layer.shadowColor = UIColor.black.cgColor
@@ -127,13 +133,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
       for image in bottom {
          bottomGrid.addArrangedSubview(makeButton(image: image, tag: count))
          count += 1
-      }
-   }
-   
-   //Function checking and reset selected buttons while one new is selected
-   func resetSelectedButtons() {
-      for button in menuButtons {
-         (button as UIButton).isSelected = false
       }
    }
    
@@ -234,7 +233,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             UIView.animate(withDuration: 0.5, animations: {
                self.arrayView.transform = CGAffineTransform(translationX: -10, y: 0)
             }){ (_) in
-               UIView.animateKeyframes(withDuration: 0.5, delay: 0.0, options:[.autoreverse, .repeat], animations: {
+               UIView.animateKeyframes(withDuration: 0.5, delay: 0.0,
+                                       options:[.autoreverse, .repeat], animations: {
                   self.arrayView.transform = CGAffineTransform(translationX: 0, y: 0)
                })
             }
@@ -243,32 +243,36 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    }
    // Animations for each orientation state
    private func upAnimation() {
-      UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0,
-                     options:.curveEaseInOut, animations: {
+      UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1,
+                     initialSpringVelocity: 0, options:.curveEaseInOut, animations: {
                         self.backgroundGrid.transform = CGAffineTransform(translationX:0 , y: 50)
       }) { (_) in
-         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0,
-                        options: .curveEaseInOut, animations: {
-                           self.backgroundGrid.transform = CGAffineTransform(translationX:0 , y: -self.view.frame.height)
+         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1,
+                        initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                           self.backgroundGrid.transform = CGAffineTransform(translationX: 0,
+                                                                        y: -self.view.frame.height)
                            self.swipeUpLabel.text = "GREAT !"
                            self.swipeUpLabel.textColor = #colorLiteral(red: 0, green: 0.4076067805, blue: 0.6132292151, alpha: 1)
-                           self.arrayView.transform = CGAffineTransform(translationX:0 , y: -self.view.frame.height)
+                           self.arrayView.transform = CGAffineTransform(translationX: 0,
+                                                                        y: -self.view.frame.height)
                            self.shareImage()
          })
       }
    }
    
    private func leftAnimation() {
-      UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0,
-                     options:.curveEaseInOut, animations: {
+      UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1,
+                     initialSpringVelocity: 0, options:.curveEaseInOut, animations: {
                         self.backgroundGrid.transform = CGAffineTransform(translationX: 50 , y: 0)
       }) { (_) in
          UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1,
                         initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
-                           self.backgroundGrid.transform = CGAffineTransform(translationX: -self.view.frame.width , y: 0)
+                           self.backgroundGrid.transform = CGAffineTransform(translationX:
+                              -self.view.frame.width , y: 0)
                            self.swipeLeftLabel.text = "GREAT !"
                            self.swipeLeftLabel.textColor = #colorLiteral(red: 0, green: 0.4076067805, blue: 0.6132292151, alpha: 1)
-                           self.arrayView.transform = CGAffineTransform(translationX: -self.view.frame.width/2, y: 0)
+                           self.arrayView.transform = CGAffineTransform(translationX:
+                              -self.view.frame.width/2, y: 0)
                            self.shareImage()
          })
       }
